@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casa Verde - Sucos Naturais Energéticos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #296e3f;
+            --secondary: #F9F9F6;
+            --accent: #FFB347;
+            --dark: #2E3D35;
+            --light: #FFFFFF;
+            --text: #444444;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 300;
+            color: var(--text);
+            overflow-x: hidden;
+            background-color: var(--light);
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+        
+        h1 { font-size: 72px; }
+        h2 { font-size: 60px; }
+        h3 { font-size: 48px; }
+        h4 { font-size: 36px; }
+        
+        p, li, a, span {
+            font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+
+        }
+        
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 25px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+            background-color: transparent;
+            backdrop-filter: blur(10px);
+        }
+        
+        header.scrolled {
+            padding: 15px 5%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 40px;
+        }
+        
+        nav ul li a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 20px;
+            transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+            position: relative;
+        }
+        
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            transition: width 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding: 0 5%;
+            margin-top: 0;
+            padding-top: 0;
+            
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(19, 19, 19, 0.755) 0%, rgba(200, 200, 200, 0.146) 100%);
+            z-index: -1;
+        }
+        
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+            transform: translateZ(-1px) scale(1.2);
+            will-change: transform;
+        }
+        
+        .hero-content {
+            max-width: 600px;
+            color: white;
+            transform: translateY(50px);
+            opacity: 0;
+            animation: fadeInUp 1.5s cubic-bezier(0.165, 0.84, 0.44, 1) 0.3s forwards;
+        }
+        
+        .hero h1 {
+            margin-bottom: 25px;
+            line-height: 1.1;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .hero p {
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeInUp 1.5s cubic-bezier(0.165, 0.84, 0.44, 1) 0.6s forwards;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 18px 35px;
+            background-color: var(--accent);
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 30px;
+            transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+            opacity: 0;
+            animation: fadeInUp 1.5s cubic-bezier(0.165, 0.84, 0.44, 1) 0.9s forwards;
+            border: 2px solid var(--accent);
+            font-size: 20px;
+            box-shadow: 0 10px 30px rgba(255, 127, 80, 0.4);
+        }
+        
+        .cta-button:hover {
+            background-color: transparent;
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 127, 80, 0.6);
+        }
+        
+        /* Seção com Efeito Parallax */
+        .parallax-section {
+            height: 60vh;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        .parallax-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(39, 55, 37, 0.629);
+        }
+        
+        .parallax-content {
+            position: relative;
+            z-index: 1;
+            color: #ffffff;
+            text-align: center;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        
+        .parallax-content h2 {
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .parallax-content p {
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease 0.3s forwards;
+            opacity: 0;
+        }
+        
+        /* About Section */
+        .about {
+            padding: 120px 5%;
+            background-color: var(--secondary);
+            position: relative;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+        
+        .section-title h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+        
+        .section-title p {
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--text);
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.3s forwards;
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .about-text {
+            flex: 1;
+            opacity: 0;
+            animation: fadeInLeft 1s ease 0.6s forwards;
+        }
+        
+        .about-text h3 {
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+        
+        .about-text p {
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .about-image {
+            flex: 1;
+            position: relative;
+            height: 500px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            animation: fadeInRight 1s ease 0.6s forwards;
+        }
+        
+        .about-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .about-image:hover .about-img {
+            transform: scale(1.05);
+        }
+        
+        /* Products Section */
+        .products {
+            padding: 120px 5%;
+            background-color: white;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        
+        .product-card:nth-child(1) {
+            animation: fadeInUp 1s ease 0.3s forwards;
+        }
+        .product-card:nth-child(2) {
+            animation: fadeInUp 1s ease 0.6s forwards;
+        }
+        .product-card:nth-child(3) {
+            animation: fadeInUp 1s ease 0.9s forwards;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .product-image {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+        
+        .product-info {
+            padding: 25px;
+        }
+        
+        .product-info h3 {
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .product-info p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: var(--text);
+        }
+        
+        .product-price {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+        
+        .add-to-cart {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        
+        .add-to-cart:hover {
+            background-color: var(--dark);
+        }
+        
+        /* Benefits Section */
+        .benefits {
+            padding: 120px 5%;
+            background-color: var(--secondary);
+        }
+        
+        .benefits-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+        
+        .benefit-card {
+            text-align: center;
+            padding: 40px 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+            opacity: 0;
+            transform: translateY(50px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .benefit-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80') center/cover fixed;
+            z-index: -1;
+            opacity: 0.1;
+        }
+        
+        .benefit-card:nth-child(1) {
+            animation: fadeInUp 1s ease 0.3s forwards;
+        }
+        .benefit-card:nth-child(2) {
+            animation: fadeInUp 1s ease 0.5s forwards;
+        }
+        .benefit-card:nth-child(3) {
+            animation: fadeInUp 1s ease 0.7s forwards;
+        }
+        .benefit-card:nth-child(4) {
+            animation: fadeInUp 1s ease 0.9s forwards;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .benefit-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--light);
+            border-radius: 50%;
+            color: var(--primary);
+            font-size: 32px;
+        }
+        
+        .benefit-card h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .benefit-card p {
+            line-height: 1.6;
+            color: var(--text);
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 120px 5%;
+            background-color: white;
+        }
+        
+        .testimonials-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .testimonial {
+            text-align: center;
+            padding: 40px;
+            display: none;
+            opacity: 0;
+        }
+        
+        .testimonial.active {
+            display: block;
+            animation: fadeIn 1s ease forwards;
+        }
+        
+        .testimonial-text {
+            font-size: 24px;
+            font-style: italic;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            color: var(--text);
+            position: relative;
+        }
+        
+        .testimonial-text::before,
+        .testimonial-text::after {
+            content: '"';
+            font-size: 40px;
+            color: var(--accent);
+            opacity: 0.3;
+            position: absolute;
+        }
+        
+        .testimonial-text::before {
+            top: -20px;
+            left: -10px;
+        }
+        
+        .testimonial-text::after {
+            bottom: -40px;
+            right: -10px;
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 20px;
+        }
+        
+        .slider-controls {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #ccc;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .slider-dot.active {
+            background-color: var(--primary);
+            transform: scale(1.2);
+        }
+        
+        /* Newsletter */
+        .newsletter {
+            padding: 100px 5%;
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+        }
+        
+        .newsletter h2 {
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+        }
+        
+        .newsletter p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.3s forwards;
+        }
+        
+        .newsletter-form {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.6s forwards;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 30px 0 0 30px;
+            font-size: 16px;
+            outline: none;
+            font-family: 'Salsa', Arial, sans-serif;
+        }
+        
+        .newsletter-form button {
+            padding: 15px 30px;
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 0 30px 30px 0;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Salsa', Arial, sans-serif;
+            font-size: 18px;
+        }
+        
+        .newsletter-form button:hover {
+            background-color: var(--dark);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 80px 5% 30px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 15px;
+        }
+        
+        .footer-column ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 18px;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--accent);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+            font-size: 20px;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 16px;
+            color: #ccc;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            h1 { font-size: 60px; }
+            h2 { font-size: 48px; }
+            h3 { font-size: 36px; }
+            h4 { font-size: 30px; }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .about-image {
+                width: 100%;
+                height: 400px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 48px; }
+            h2 { font-size: 40px; }
+            h3 { font-size: 32px; }
+            h4 { font-size: 28px; }
+            
+            p, li, a, span {
+                font-size: 16px;
+            }
+            
+            nav ul {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-form input {
+                border-radius: 30px;
+                margin-bottom: 10px;
+            }
+            
+            .newsletter-form button {
+                border-radius: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <a href="#" class="logo">Casa Verde</a>
+        <nav>
+            <ul>
+                <li><a href="#home">Início</a></li>
+                <li><a href="#about">Sobre</a></li>
+                <li><a href="#products">Produtos</a></li>
+                <li><a href="#benefits">Benefícios</a></li>
+                <li><a href="#contact">Contato</a></li>
+            </ul>
+        </nav>
+        <div class="mobile-menu-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+       <video autoplay muted loop playsinline class="hero-bg">
+        <source src="videohero1.mp4" type="video/mp4">
+         </video>
+        <div class="hero-content">
+            <h1>ENERGIA PURA EM CADA GOLE</h1>
+            <p>Descubra a força da natureza em nossos sucos 100% naturais, feitos com ingredientes orgânicos selecionados para revitalizar seu corpo e mente.</p>
+            <a href="#products" class="cta-button">Experimente agora</a>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="section-title">
+            <h2>Sobre Nós</h2>
+            <p>Nossa missão é trazer saúde e vitalidade através de sucos nutritivos e deliciosos, combinando ciência e natureza.</p>
+        </div>
+        <div class="about-content">
+            <div class="about-text">
+                <h3>Feito com amor e ingredientes naturais</h3>
+                <p>Na Casa Verde, acreditamos que a verdadeira energia vem da natureza. Nossos sucos são preparados artesanalmente, sem conservantes ou aditivos químicos, preservando todos os nutrientes e sabores.</p>
+                <p>Cada receita foi cuidadosamente desenvolvida por nutricionistas para oferecer o equilíbrio perfeito entre sabor e benefícios à saúde. Utilizamos apenas frutas, verduras e legumes orgânicos, colhidos no ponto ideal de maturação.</p>
+                <p>Nossa produção é sustentável, desde a seleção dos fornecedores até as embalagens ecológicas. Cada gole é um passo em direção a uma vida mais saudável e consciente.</p>
+            </div>
+            <div class="about-image">
+                <img src="FOTO02.jpg" alt="Preparo de sucos" class="about-img">
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção com Efeito Parallax -->
+    <section class="parallax-section" style="background-image: url('FOTO01.jpg');">
+        <div class="parallax-content">
+            <h2>Natureza em estado líquido</h2>
+            <p>Cada garrafa contém a essência de frutas e vegetais cuidadosamente selecionados, preservando todos os nutrientes e sabores.</p>
+        </div>
+    </section>
+
+    <section class="products" id="products">
+        <div class="section-title">
+            <h2>Nossos Produtos</h2>
+            <p>Conheça nossa linha exclusiva de sucos energéticos e detox.</p>
+        </div>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="FOTO04.jpg" alt="Suco Detox Verde">
+                </div>
+                <div class="product-info">
+                    <h3>Detox Verde</h3>
+                    <p>Combinação poderosa de couve, maçã verde, limão, gengibre e pepino. Ideal para limpar o organismo e recarregar as energias.</p>
+                    <div class="product-price">R$ 12,90</div>
+                    <button class="add-to-cart">Adicionar ao carrinho</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="FOTO05.jpg" alt="Suco Energia Tropical">
+                </div>
+                <div class="product-info">
+                    <h3>Energia Tropical</h3>
+                    <p>Mistura revigorante de abacaxi, manga, maracujá e hortelã. Perfeito para antes ou depois dos exercícios físicos.</p>
+                    <div class="product-price">R$ 14,90</div>
+                    <button class="add-to-cart">Adicionar ao carrinho</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="FOTO06.jpg" alt="Suco Antioxidante Vermelho">
+                </div>
+                <div class="product-info">
+                    <h3>Antioxidante Vermelho</h3>
+                    <p>Rico em beterraba, morango, mirtilo e gengibre. Combate os radicais livres e fortalece o sistema imunológico.</p>
+                    <div class="product-price">R$ 13,90</div>
+                    <button class="add-to-cart">Adicionar ao carrinho</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+      <!-- Seção com Efeito Parallax -->
+    <section class="parallax-section" style="background-image: url('FOTO03.jpg');">
+        <div class="parallax-content">
+            <h2>Ingrediente em Destaque</h2>
+            <p>Cada semana escolhemos um alimento natural e contamos seus benefícios, curiosidades e formas criativas de incluir no seu cardápio.
+Assim, você amplia seu repertório e transforma sua alimentação em uma experiência rica e variada.</p>
+        </div>
+    </section>
+
+    <section class="benefits" id="benefits">
+        <div class="section-title">
+            <h2>Benefícios</h2>
+            <p>Por que escolher nossos sucos?</p>
+        </div>
+        <div class="benefits-container">
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                    </svg>
+                </div>
+                <h3>100% Natural</h3>
+                <p>Nada de conservantes, corantes ou açúcares adicionados. Apenas ingredientes puros e nutritivos.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2v4"></path>
+                        <path d="m16 6 3-3"></path>
+                        <path d="M18 9h4"></path>
+                        <path d="M17 16.92a7 7 0 0 1 .49-9.27 7.1 7.1 0 0 1 4.59-2.3 7.13 7.13 0 0 1 3.77.74"></path>
+                        <path d="M12.33 21a7 7 0 0 1-7.77-11.27 7.1 7.1 0 0 1 2.3-4.59 7.13 7.13 0 0 1 .74-3.77"></path>
+                        <path d="M2 15h4"></path>
+                        <path d="m6 16 3 3"></path>
+                        <path d="M2 21h20"></path>
+                    </svg>
+                </div>
+                <h3>Energia Imediata</h3>
+                <p>Vitaminas e minerais de rápida absorção para te dar disposição ao longo do dia.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2v4"></path>
+                        <path d="m16 6 3-3"></path>
+                        <path d="M18 9h4"></path>
+                        <path d="M17 16.92a7 7 0 0 1 .49-9.27 7.1 7.1 0 0 1 4.59-2.3 7.13 7.13 0 0 1 3.77.74"></path>
+                        <path d="M12.33 21a7 7 0 0 1-7.77-11.27 7.1 7.1 0 0 1 2.3-4.59 7.13 7.13 0 0 1 .74-3.77"></path>
+                        <path d="M2 15h4"></path>
+                        <path d="m6 16 3 3"></path>
+                        <path d="M2 21h20"></path>
+                    </svg>
+                </div>
+                <h3>Detox Natural</h3>
+                <p>Auxilia na eliminação de toxinas, melhorando o funcionamento do organismo como um todo.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0z"></path>
+                        <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                        <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                        <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                    </svg>
+                </div>
+                <h3>Bem-Estar</h3>
+                <p>Melhora a digestão, o sono, a pele e o humor. Seu corpo agradece!</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="section-title">
+            <h2>Depoimentos</h2>
+            <p>O que nossos clientes dizem</p>
+        </div>
+        <div class="testimonials-slider">
+            <div class="testimonial active">
+                <p class="testimonial-text">Desde que comecei a tomar os sucos da Casa Verde, minha energia aumentou consideravelmente. Já não preciso de café pela tarde e meu sono melhorou muito!</p>
+                <p class="testimonial-author">- Ana Clara, 32 anos</p>
+            </div>
+            <div class="testimonial">
+                <p class="testimonial-text">Adoro o sabor e a praticidade. Levo sempre uma garrafa para o trabalho e me sinto muito mais disposto. O Detox Verde é o meu preferido!</p>
+                <p class="testimonial-author">- Rodrigo, 28 anos</p>
+            </div>
+            <div class="testimonial">
+                <p class="testimonial-text">Como nutricionista, recomendo os sucos da Casa Verde para meus pacientes. A qualidade dos ingredientes e o equilíbrio nutricional são impressionantes.</p>
+                <p class="testimonial-author">- Dra. Juliana, 40 anos</p>
+            </div>
+            <div class="slider-controls">
+                <div class="slider-dot active" data-slide="0"></div>
+                <div class="slider-dot" data-slide="1"></div>
+                <div class="slider-dot" data-slide="2"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="newsletter">
+        <h2>Receba nossas novidades</h2>
+        <p>Assine nossa newsletter e receba promoções exclusivas, dicas de saúde e receitas especiais.</p>
+        <form class="newsletter-form">
+            <input type="email" placeholder="Digite seu melhor e-mail" required>
+            <button type="submit">Assinar</button>
+        </form>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Casa Verde</h3>
+                <p>Energia e vitalidade em cada gole. Sucos 100% naturais para uma vida mais saudável.</p>
+                <div class="social-links">
+                    <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+                    <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                    <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Links Rápidos</h3>
+                <ul>
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#about">Sobre Nós</a></li>
+                    <li><a href="#products">Produtos</a></li>
+                    <li><a href="#benefits">Benefícios</a></li>
+                    <li><a href="#contact">Contato</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Produtos</h3>
+                <ul>
+                    <li><a href="#">Detox Verde</a></li>
+                    <li><a href="#">Energia Tropical</a></li>
+                    <li><a href="#">Antioxidante Vermelho</a></li>
+                    <li><a href="#">Kit Semanal</a></li>
+                    <li><a href="#">Assinatura Mensal</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contato</h3>
+                <ul>
+                    <li>Rua das Frutas, 123</li>
+                    <li>Jardim Natural - SP</li>
+                    <li>(11) 98765-4321</li>
+                    <li>contato@sucoverdevital.com.br</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Casa Verde. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Efeito Parallax Avançado
+        document.addEventListener('scroll', function() {
+            const scrollPosition = window.pageYOffset;
+            const heroBg = document.querySelector('.hero-bg');
+            
+            // Ajuste mais intenso para o efeito parallax
+            heroBg.style.transform = `translateY(${scrollPosition * 0.5}px) translateZ(-1px) scale(1.2)`;
+            
+            // Efeito parallax nos cards de benefícios
+            const benefitCards = document.querySelectorAll('.benefit-card');
+            benefitCards.forEach((card, index) => {
+                const speed = 0.2 + (index * 0.05);
+                card.style.backgroundPositionY = `-${scrollPosition * speed}px`;
+            });
+        });
+        
+        // Testimonial slider
+        const testimonials = document.querySelectorAll('.testimonial');
+        const dots = document.querySelectorAll('.slider-dot');
+        let currentSlide = 0;
+        
+        function showSlide(index) {
+            testimonials.forEach(testimonial => {
+                testimonial.classList.remove('active');
+                testimonial.style.opacity = 0;
+            });
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            testimonials[index].classList.add('active');
+            dots[index].classList.add('active');
+            currentSlide = index;
+            
+            // Trigger reflow to restart animation
+            void testimonials[index].offsetWidth;
+            testimonials[index].style.opacity = 1;
+        }
+        
+        dots.forEach(dot => {
+            dot.addEventListener('click', function() {
+                const slideIndex = parseInt(this.getAttribute('data-slide'));
+                showSlide(slideIndex);
+            });
+        });
+        
+        // Auto slide change
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % testimonials.length;
+            showSlide(currentSlide);
+        }, 5000);
+        
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const nav = document.querySelector('nav ul');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (nav.style.display === 'flex') {
+                        nav.style.display = 'none';
+                    }
+                }
+            });
+        });
+        
+        // Intersection Observer para animações
+        const animateOnScroll = function() {
+            const elements = document.querySelectorAll('.section-title h2, .section-title p, .about-text, .about-image, .product-card, .benefit-card, .newsletter h2, .newsletter p, .newsletter-form');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            elements.forEach(element => {
+                observer.observe(element);
+            });
+        };
+        
+        // Inicializar quando o DOM estiver carregado
+        document.addEventListener('DOMContentLoaded', function() {
+            animateOnScroll();
+            window.dispatchEvent(new Event('scroll'));
+        });
+    </script>
+</body>
+</html>
